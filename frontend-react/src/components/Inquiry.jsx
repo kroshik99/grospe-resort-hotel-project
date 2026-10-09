@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
 import Icon from './Icon.jsx';
 import { RESORT, ROOMS } from '../content.js';
-import { peso, smsHref, sendOnMessenger } from '../contact.js';
+import { peso, plural, smsHref, sendOnMessenger } from '../contact.js';
 
 // Local (not UTC) date, so "today" is right for Philippine mornings too.
 const today = () => new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 10);
 const nice = (iso) => new Date(`${iso}T00:00`).toLocaleDateString('en-PH', { month: 'short', day: 'numeric', year: 'numeric' });
-const plural = (n, word) => `${n} ${word}${n === 1 ? '' : 's'}`;
 
 /** No backend: guests get an instant estimate from the published rates, then send the
  *  inquiry by Messenger, SMS or a call. The front desk confirms availability. */

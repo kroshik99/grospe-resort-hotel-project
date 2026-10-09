@@ -7,7 +7,7 @@ export default function Logo({ full = false, className = '' }) {
 /** Mark + wordmark lockup for the header and footer. */
 export function Brand({ onClick }) {
   return (
-    <a href="#top" className="brand" onClick={onClick}>
+    <a href="/#top" className="brand" onClick={onClick}>
       <Logo />
       <span className="brand-word"><b>Grospe Resort</b><small>Boracay</small></span>
     </a>

@@ -73,6 +73,45 @@ export const GALLERY = [
   { c: 'Elsa Villa', cls: '', src: '/photos/elsa-villa.jpg' },
 ];
 
+// The events page (/events/), plus the home-page banner and announcement bar. Times are Philippine
+// time (+08:00). An event is promoted until `ends`, then moves to "Past events" by itself.
+// theme: 'halloween' adds the bats, pumpkins and cobwebs; leave it out for the plain navy-and-gold look.
+// Source: the resort's Halloween Treats flyer (Images/events.jpg).
+export const EVENTS = [
+  {
+    id: 'halloween-2026',
+    theme: 'halloween',
+    title: 'Halloween Treats',
+    tagline: 'Trick-or-Treat Adventure',
+    starts: '2026-10-31T15:00:00+08:00',
+    ends: '2026-11-01T00:00:00+08:00', // the flyer gives no end time, so it runs to midnight
+    when: 'Saturday, October 31, 2026',
+    time: '3:00 PM',
+    short: 'Sat, Oct 31 · 3:00 PM',
+    lede: 'Trick-or-treating, face painting, games, a pumpkin hunt and a costume contest — with prizes waiting for the little ghosts and goblins.',
+    photo: { src: '/events/halloween-treats.jpg', alt: 'A Halloween treats board with spider cookies, ghost strawberries and candy' },
+    scene: { src: '/events/halloween-resort.jpg', alt: 'Grospe Resort decorated with jack-o’-lanterns and scarecrows' },
+    poster: '/events/halloween-poster.jpg',
+    dayPass: 100, // entrance fee for day-pass guests; in-house guests get in free
+    facePainting: { price: 50, from: '2:30 PM' },
+    chips: [['palette', 'Face painting from 2:30 PM'], ['gift', 'Prizes await'], ['ticket', 'Free for in-house guests']],
+    activitiesTitle: 'An afternoon of tricks & treats',
+    activities: [
+      { i: 'candy', t: 'Trick or treat', d: 'Our in-house guests get Halloween treats for every kid in the house.' },
+      { i: 'palette', t: 'Face painting', d: '₱50 each, starting at 2:30 PM — before the trick-or-treating begins.' },
+      { i: 'search', t: 'Find the pumpkins', d: 'A pumpkin hunt around the resort for sharp-eyed little explorers.' },
+      { i: 'trophy', t: 'Best Halloween costume', d: 'Come dressed up. The best costume takes home a prize.' },
+      { i: 'dice', t: 'Games & kids activities', d: 'Lots of games and activities for the kids — and lots more.' },
+      { i: 'cocktail', t: 'Pica-pica & cocktails', d: 'Halloween pica-pica, cocktails and Halloween chills for the grown-ups.' },
+    ],
+    schedule: [
+      { t: '2:30 PM', h: 'Face painting opens', d: '₱50 each. Come early to get the kids ready.' },
+      { t: '3:00 PM', h: 'Trick or treat', d: 'The Halloween treats come out for every kid in the house.' },
+      { t: 'Then', h: 'Games, pumpkin hunt & costume contest', d: 'Find the pumpkins, show off your costume and play for prizes.' },
+    ],
+  },
+];
+
 export const FAQ = [
   { q: 'How do I book?', a: 'Message us on Facebook or call 036-2862544 / 0985-0821245 with your dates, room and number of guests. We’ll confirm availability and your final rate. The “Plan your stay” form above writes the message for you.' },
   { q: 'How much is an extra guest?', a: '₱1,200 per extra person for the AJ Deluxe Room, Aldrin Family Suite and Elsa Villa. On the Ber-months 4D/3N packages it’s ₱4,300 (AJ Deluxe) or ₱4,200 (Aldrin Family Suite) per extra person.' },

@@ -6,20 +6,22 @@ import Hero from './components/Hero.jsx';
 import Inquiry from './components/Inquiry.jsx';
 import Rooms from './components/Rooms.jsx';
 import Packages from './components/Packages.jsx';
-import Icon from './components/Icon.jsx';
+import Toast, { useToast } from './components/Toast.jsx';
+import { EventBar, EventPromo } from './components/Events.jsx';
 import { About, Services, Gallery, Location, Faq, FinalCta, Footer, MobileBar } from './components/Sections.jsx';
 
 export default function App() {
   const [roomId, setRoomId] = useState(ROOMS[0].id);
   const [pulse, setPulse] = useState(0);
-  const [toast, setToast] = useState('');
+  const [toast, setToast] = useToast();
   useReveal('page');
 
+  // Arriving from another page at /#rooms etc.: the sections only exist once React has rendered,
+  // after the browser's own jump to the anchor, so jump again now.
   useEffect(() => {
-    if (!toast) return;
-    const t = setTimeout(() => setToast(''), 3600);
-    return () => clearTimeout(t);
-  }, [toast]);
+    const id = decodeURIComponent(location.hash.slice(1));
+    if (id) document.getElementById(id)?.scrollIntoView();
+  }, []);
 
   // A room card's "Inquire" picks that room in the planner (the link itself scrolls to #book).
   function inquire(id) {
@@ -29,10 +31,12 @@ export default function App() {
 
   return (
     <>
+      <EventBar />
       <Header />
       <div id="top" />
       <Hero />
       <Inquiry roomId={roomId} setRoomId={setRoomId} pulse={pulse} onToast={setToast} />
+      <EventPromo />
       <About />
       <Rooms onInquire={inquire} />
       <Packages onToast={setToast} />
@@ -43,7 +47,7 @@ export default function App() {
       <FinalCta />
       <Footer />
       <MobileBar />
-      {toast && <div className="toast" role="status" key={toast}><Icon name="check" size={18} stroke={2.4} />{toast}</div>}
+      <Toast text={toast} />
     </>
   );
 }

@@ -176,7 +176,7 @@ export function Footer() {
           </div>
           <div><h5>Visit</h5>{RESORT.address.map(l => <span key={l}>{l}</span>)}</div>
           <div><h5>Call</h5><a href={RESORT.landline.href}>{RESORT.landline.label}</a><a href={RESORT.mobile.href}>{RESORT.mobile.label}</a></div>
-          <div><h5>Explore</h5><a href="#rooms">Rooms &amp; rates</a><a href="#packages">Packages</a><a href="#gallery">Gallery</a>
+          <div><h5>Explore</h5><a href="/#rooms">Rooms &amp; rates</a><a href="/#packages">Packages</a><a href="/events/">Events</a><a href="/#gallery">Gallery</a>
             <a href={RESORT.facebook} target="_blank" rel="noopener">Facebook</a></div>
         </div>
         <div className="foot-bottom">

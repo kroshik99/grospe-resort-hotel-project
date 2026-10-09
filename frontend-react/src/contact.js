@@ -2,6 +2,8 @@ import { RESORT } from './content.js';
 
 export const peso = new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP', maximumFractionDigits: 0 });
 
+export const plural = (n, word) => `${n} ${word}${n === 1 ? '' : 's'}`;
+
 /** sms: link with the message pre-filled (works on iOS and Android). */
 export const smsHref = (body) => `sms:${RESORT.mobile.sms}?&body=${encodeURIComponent(body)}`;
 

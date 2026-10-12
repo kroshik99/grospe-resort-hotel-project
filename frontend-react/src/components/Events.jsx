@@ -3,7 +3,7 @@ import Icon from './Icon.jsx';
 import Photo from './Photo.jsx';
 import { Bats, Embers, Pumpkin, Web } from './Spooky.jsx';
 import { currentEvents, eventStatus, timeLeft, useNow } from '../events.js';
-import { plural } from '../contact.js';
+import { plural, bookingLink } from '../contact.js';
 
 /** Days / hours / minutes / seconds to the start, then "Happening now". */
 export function Countdown({ ev }) {
@@ -82,7 +82,7 @@ export function EventPromo() {
             <Countdown ev={ev} />
             <div className="cta-row">
               <a href="/events/" className="btn btn-ember">See the event <Icon name="arrow" size={16} stroke={2.2} /></a>
-              <a href="/events/#reserve" className="btn btn-outline-light">Reserve a spot</a>
+              <a {...bookingLink} className="btn btn-outline-light"><Icon name="calendar" size={16} /> Book your stay</a>
             </div>
           </div>
           <a href="/events/" className="evp-media" aria-hidden="true" tabIndex={-1}>

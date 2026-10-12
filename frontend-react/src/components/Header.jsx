@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Brand } from './Logo.jsx';
 import { currentEvents } from '../events.js';
+import { bookingLink } from '../contact.js';
 
 // Root-relative, so they work from /events/ too (on the home page they just scroll).
 const LINKS = [['/#rooms', 'Rooms'], ['/#packages', 'Packages'], ['/events/', 'Events', 'events'], ['/#services', 'Services'], ['/#gallery', 'Gallery'], ['/#location', 'Location'], ['/#faq', 'FAQ']];
@@ -30,7 +31,7 @@ export default function Header({ current }) {
           ))}
         </nav>
         <div className="nav-actions">
-          <a href="/#book" className="btn btn-gold btn-book">Book now</a>
+          <a {...bookingLink} className="btn btn-gold btn-book">Book now</a>
           <button className="icon-btn menu-toggle" onClick={() => setOpen(o => !o)} aria-expanded={open} aria-label="Menu">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
           </button>

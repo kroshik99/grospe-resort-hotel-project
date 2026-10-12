@@ -4,8 +4,9 @@ export const peso = new Intl.NumberFormat('en-PH', { style: 'currency', currency
 
 export const plural = (n, word) => `${n} ${word}${n === 1 ? '' : 's'}`;
 
-/** sms: link with the message pre-filled (works on iOS and Android). */
-export const smsHref = (body) => `sms:${RESORT.mobile.sms}?&body=${encodeURIComponent(body)}`;
+/** Spread onto an <a>: opens the resort's online booking page in a new tab.
+ *  Until RESORT.booking is filled in, "Book now" opens the Messenger chat instead. */
+export const bookingLink = { href: RESORT.booking || RESORT.messenger, target: '_blank', rel: 'noopener' };
 
 /** Messenger can't be pre-filled, so copy the inquiry first and open the chat;
  *  the guest just pastes. Returns whether the copy worked, for the toast. */

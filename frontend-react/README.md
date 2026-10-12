@@ -1,8 +1,9 @@
 # Grospe Resort Boracay — site
 
 Vite + React 18 site with two pages: the landing page (`/`) and events
-(`/events/`). No backend: rooms, rates, events and copy live in one file, and
-inquiries go to the resort through Messenger, SMS or a call.
+(`/events/`). No backend: rooms, rates, events and copy live in one file.
+Guests book on the resort's own swift.io booking page, or reach the resort by
+Messenger or a call.
 
 ```bash
 npm install
@@ -16,7 +17,7 @@ Almost everything is in **`src/content.js`**:
 
 | What | Where in `content.js` |
 |---|---|
-| Phone numbers, Facebook / Messenger link, address, map search | `RESORT` |
+| Phone numbers, Facebook / Messenger link, **swift.io booking link**, address, map search | `RESORT` |
 | Rooms, nightly rates, extra-guest fee, max guests, features | `ROOMS` |
 | Ber-months 4D/3N packages | `PACKAGES` |
 | The six services | `SERVICES` |
@@ -24,20 +25,16 @@ Almost everything is in **`src/content.js`**:
 | Events (see below) | `EVENTS` |
 | FAQ | `FAQ` |
 
-The "Plan your stay" estimator reads `price`, `goodFor`, `max` and `extra`
-from `ROOMS`, so changing a rate there updates the room cards, the estimate and
-the room dropdown together.
-
 ## Events
 
 `/events/` is a real second page (`events/index.html` → `src/EventsPage.jsx`),
 so it works on any static host without rewrite rules. It shows the next event
 in full: banner with a live countdown, activities, schedule, prices, a
-"Reserve a spot" form that writes the Messenger/SMS message, and the poster.
+"See you there" card (Book your stay / Message us / Call) and the poster.
 
 While an event is coming up, the home page also gets an announcement bar
-above the header (visitors can close it), a promo banner under "Plan your
-stay", and a pulsing dot on **Events** in the menu.
+above the header (visitors can close it), a promo banner under the hero, and
+a pulsing dot on **Events** in the menu.
 
 **It all switches itself off.** Once an event's `ends` time passes, the bar,
 banner and dot disappear, and the event moves to "Past events". With nothing
@@ -68,14 +65,16 @@ Brand tokens are at the top of `src/styles.css` (`:root`): navy `#14234A`,
 gold `#C9A24A` (plus the gold gradient), ivory `#F7F3EA`. Fonts: Cinzel for
 the logo-style capitals, Cormorant Garamond for headings, Montserrat for body text.
 
-## How inquiries work
+## How booking works
 
-- **Send on Messenger** copies the guest's inquiry (room, dates, guests,
-  estimate) to the clipboard and opens `m.me/grosperesortboracay`. Messenger
-  links can't be pre-filled, so the guest pastes it.
-- **Text us** opens the phone's SMS app with the same message pre-filled to the mobile number.
-- **Call** dials the mobile number. On phones, a Message / Call bar stays at
-  the bottom of the screen once you scroll past the top.
+- **Book now** (header, hero, closing banner, phone bar) and **Book your stay**
+  (events) open the resort's swift.io booking page in a new tab. The link is
+  `RESORT.booking` in `content.js`: change it there and every button follows.
+- **Message us** opens `m.me/grosperesortboracay`. The packages' **Inquire**
+  button first copies a message naming the package, since Messenger links
+  can't be pre-filled, so the guest just pastes it.
+- **Call** dials the mobile number. On phones, a Book / Message / Call bar
+  stays at the bottom of the screen once you scroll past the top.
 
 ## Motion
 

@@ -9,6 +9,7 @@ export const RESORT = {
   mobile: { label: '0985-0821245', href: 'tel:+639850821245', sms: '+639850821245' },
   facebook: 'https://www.facebook.com/grosperesortboracay/',
   messenger: 'https://m.me/grosperesortboracay',
+  booking: '', // TODO: the client's swift.io booking page — every "Book now" button opens it
   mapQuery: 'Grospe Resort Boracay, Ambulong, Manoc-Manoc, Malay, Aklan',
 };
 
@@ -95,6 +96,7 @@ export const EVENTS = [
     dayPass: 100, // entrance fee for day-pass guests; in-house guests get in free
     facePainting: { price: 50, from: '2:30 PM' },
     chips: [['palette', 'Face painting from 2:30 PM'], ['gift', 'Prizes await'], ['ticket', 'Free for in-house guests']],
+    join: 'Staying with us on the 31st? There’s no entrance fee, and every kid in the house gets Halloween treats. Day-pass guests are welcome too.',
     activitiesTitle: 'An afternoon of tricks & treats',
     activities: [
       { i: 'candy', t: 'Trick or treat', d: 'Our in-house guests get Halloween treats for every kid in the house.' },
@@ -113,7 +115,7 @@ export const EVENTS = [
 ];
 
 export const FAQ = [
-  { q: 'How do I book?', a: 'Message us on Facebook or call 036-2862544 / 0985-0821245 with your dates, room and number of guests. We’ll confirm availability and your final rate. The “Plan your stay” form above writes the message for you.' },
+  { q: 'How do I book?', a: 'Tap “Book now”, or message us on Facebook or call 036-2862544 / 0985-0821245 with your dates, room and number of guests. We’ll confirm availability and your final rate.' },
   { q: 'How much is an extra guest?', a: '₱1,200 per extra person for the AJ Deluxe Room, Aldrin Family Suite and Elsa Villa. On the Ber-months 4D/3N packages it’s ₱4,300 (AJ Deluxe) or ₱4,200 (Aldrin Family Suite) per extra person.' },
   { q: 'Is breakfast included?', a: 'Complimentary breakfast comes with the Ber-months 4D/3N packages. We also serve an all-day breakfast menu with non-alcoholic and alcoholic drinks.' },
   { q: 'Do you arrange transfers?', a: 'Yes. Round-trip transfer is included in the Ber-months packages, and for other stays we arrange transport with our accredited partner.' },

@@ -2,23 +2,21 @@ import { useCallback, useEffect, useState } from 'react';
 import { useReveal } from './useReveal.jsx';
 import { RESORT } from './content.js';
 import { currentEvents, pastEvents, useNow } from './events.js';
-import { peso, plural, smsHref, sendOnMessenger } from './contact.js';
+import { peso, bookingLink } from './contact.js';
 import Header from './components/Header.jsx';
 import Icon from './components/Icon.jsx';
 import Logo from './components/Logo.jsx';
 import Photo from './components/Photo.jsx';
-import Toast, { useToast } from './components/Toast.jsx';
 import { Countdown } from './components/Events.jsx';
 import { Night, Pumpkin, Web } from './components/Spooky.jsx';
 import { Footer, MobileBar } from './components/Sections.jsx';
 
-/** /events/ — the next event in full (banner, activities, schedule, prices, sign-up, poster),
+/** /events/ — the next event in full (banner, activities, schedule, prices, poster),
  *  then anything else coming up, past events, and hosting your own. */
 export default function EventsPage() {
   const now = useNow(60000);
   const [featured, ...more] = currentEvents(now);
   const past = pastEvents(now);
-  const [toast, setToast] = useToast();
   const [poster, setPoster] = useState(null);
   const closePoster = useCallback(() => setPoster(null), []);
   useReveal(featured?.id ?? 'none');
@@ -33,7 +31,7 @@ export default function EventsPage() {
             <EventHero ev={featured} onPoster={() => setPoster(featured)} />
             <Activities ev={featured} />
             <Plan ev={featured} />
-            <Reserve ev={featured} onToast={setToast} onPoster={() => setPoster(featured)} />
+            <Join ev={featured} onPoster={() => setPoster(featured)} />
           </>
         ) : <NoEvents />}
         {more.length > 0 && <EventList eyebrow="Coming up" title="More events" events={more} />}
@@ -43,7 +41,6 @@ export default function EventsPage() {
       <Footer />
       <MobileBar />
       {poster && <PosterView ev={poster} onClose={closePoster} />}
-      <Toast text={toast} />
     </>
   );
 }
@@ -66,7 +63,7 @@ function EventHero({ ev, onPoster }) {
           </ul>
           <Countdown ev={ev} />
           <div className="cta-row">
-            <a href="#reserve" className="btn btn-ember">Reserve a spot <Icon name="arrow" size={16} stroke={2.2} /></a>
+            <a {...bookingLink} className="btn btn-ember"><Icon name="calendar" size={18} /> Book your stay</a>
             {ev.poster && <button className="btn btn-outline-light" onClick={onPoster}>View the poster</button>}
           </div>
         </div>
@@ -142,76 +139,25 @@ function Plan({ ev }) {
   );
 }
 
-function Stepper({ label, value, min, max, onChange }) {
+/** Next to the poster: how to come, with booking for guests who'd like to stay over. */
+function Join({ ev, onPoster }) {
   return (
-    <div className="stepper" role="group" aria-label={label}>
-      <button type="button" onClick={() => onChange(value - 1)} disabled={value <= min} aria-label={`Fewer ${label.toLowerCase()}`}><Icon name="minus" size={16} stroke={2.4} /></button>
-      <output aria-live="polite">{value}</output>
-      <button type="button" onClick={() => onChange(value + 1)} disabled={value >= max} aria-label={`More ${label.toLowerCase()}`}><Icon name="plus" size={16} stroke={2.4} /></button>
-    </div>
-  );
-}
-
-/** No backend: the guest picks a headcount and we write the Messenger / SMS message for them. */
-function Reserve({ ev, onToast, onPoster }) {
-  const [kids, setKids] = useState(2);
-  const [adults, setAdults] = useState(2);
-  const [stay, setStay] = useState('day');
-  const [paint, setPaint] = useState(0);
-  const painted = Math.min(paint, kids);
-  const inHouse = stay === 'resort';
-
-  const who = [kids && plural(kids, 'kid'), plural(adults, 'adult')].filter(Boolean).join(' and ');
-  const message = `Hi Grospe Resort! We'd like to join ${ev.title} on ${ev.when} (${ev.time}): ${who}, ${inHouse ? 'staying at the resort' : 'coming on a day pass'}.`
-    + (painted ? ` Face painting for ${plural(painted, 'kid')}, please.` : '');
-
-  async function messenger() {
-    const copied = await sendOnMessenger(message);
-    onToast(copied ? 'Message copied — paste it into the Messenger chat.' : 'Opening Messenger — tell us who’s coming.');
-  }
-
-  return (
-    <section className="ev-sec ev-reserve" id="reserve">
-      <div className="wrap rsv-grid">
-        <div className="rsv-card reveal from-left">
-          <div className="rsv-head">
-            <span className="eyebrow">Join the fun</span>
-            <h2>Reserve a spot</h2>
-            <p>Tell us who’s coming and we’ll write the message for you.</p>
-          </div>
-          <div className="rsv-row">
-            <div><strong>Kids</strong><small>Treats, games &amp; prizes</small></div>
-            <Stepper label="Kids" value={kids} min={0} max={12} onChange={setKids} />
-          </div>
-          <div className="rsv-row">
-            <div><strong>Adults</strong><small>Pica-pica &amp; cocktails</small></div>
-            <Stepper label="Adults" value={adults} min={1} max={12} onChange={setAdults} />
-          </div>
-          <div className="rsv-row">
-            <div><strong>We’re…</strong><small>{inHouse ? 'No entrance fee' : `${peso.format(ev.dayPass)} entrance fee`}</small></div>
-            <div className="seg" role="group" aria-label="Staying with us?">
-              <button type="button" aria-pressed={!inHouse} onClick={() => setStay('day')}>On a day pass</button>
-              <button type="button" aria-pressed={inHouse} onClick={() => setStay('resort')}>Staying here</button>
-            </div>
-          </div>
-          {ev.facePainting && kids > 0 && (
-            <div className="rsv-row">
-              <div><strong>Face painting</strong><small>
-                {painted ? `${painted} × ${peso.format(ev.facePainting.price)} = ${peso.format(painted * ev.facePainting.price)}` : `${peso.format(ev.facePainting.price)} each, from ${ev.facePainting.from}`}
-              </small></div>
-              <Stepper label="Kids for face painting" value={painted} min={0} max={kids} onChange={setPaint} />
-            </div>
-          )}
-          <blockquote className="rsv-msg">{message}</blockquote>
-          <div className="rsv-actions">
-            <button className="btn btn-ember" onClick={messenger}><Icon name="chat" size={18} /> Send on Messenger</button>
-            <a className="btn btn-ghost-dark" href={smsHref(message)}><Icon name="sms" size={18} /> Text us</a>
-            <a className="btn btn-ghost-dark" href={RESORT.mobile.href}><Icon name="phone" size={18} /> Call</a>
+    <section className="ev-sec ev-join" id="join">
+      <div className="wrap join-grid">
+        <div className="join-card reveal from-left">
+          <span className="eyebrow">Join the fun</span>
+          <h2>See you on {ev.when.split(',').slice(0, 2).join(',')}</h2>
+          <p className="join-when"><Icon name="clock" size={18} /> {ev.time}{ev.facePainting ? ` · face painting from ${ev.facePainting.from}` : ''}</p>
+          {ev.join && <p>{ev.join}</p>}
+          <div className="join-actions">
+            <a {...bookingLink} className="btn btn-ember"><Icon name="calendar" size={18} /> Book your stay</a>
+            <a href={RESORT.messenger} target="_blank" rel="noopener" className="btn btn-ghost-dark"><Icon name="chat" size={18} /> Message us</a>
+            <a href={RESORT.mobile.href} className="btn btn-ghost-dark"><Icon name="phone" size={18} /> Call</a>
           </div>
         </div>
 
         {ev.poster && (
-          <div className="rsv-poster reveal from-right">
+          <div className="join-poster reveal from-right">
             <button className="poster-thumb" onClick={onPoster} aria-label="View the event poster">
               <img src={ev.poster} alt="" loading="lazy" />
               <span className="poster-hint"><Icon name="search" size={16} /> Tap to enlarge</span>

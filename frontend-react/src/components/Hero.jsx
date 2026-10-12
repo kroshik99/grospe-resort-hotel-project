@@ -2,7 +2,7 @@ import Logo from './Logo.jsx';
 import Icon from './Icon.jsx';
 import Photo from './Photo.jsx';
 import { RESORT, ROOMS } from '../content.js';
-import { peso } from '../contact.js';
+import { peso, bookingLink } from '../contact.js';
 
 const fromRate = Math.min(...ROOMS.filter(r => !r.perPerson).map(r => r.price));
 
@@ -21,7 +21,8 @@ export default function Hero() {
             to a two-storey villa for the whole barkada.
           </p>
           <div className="cta-row">
-            <a href="#rooms" className="btn btn-gold">See rooms &amp; rates</a>
+            <a {...bookingLink} className="btn btn-gold"><Icon name="calendar" size={18} /> Book now</a>
+            <a href="#rooms" className="btn btn-outline-light">See rooms &amp; rates</a>
             <a href={RESORT.messenger} target="_blank" rel="noopener" className="btn btn-outline-light">
               <Icon name="chat" size={18} /> Message us
             </a>

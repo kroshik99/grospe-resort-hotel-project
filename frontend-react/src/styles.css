@@ -33,7 +33,7 @@ button{font-family:inherit}
 :focus-visible{outline:2.5px solid var(--gold);outline-offset:3px;border-radius:4px}
 .wrap{max-width:var(--maxw);margin:0 auto;padding-inline:24px}
 section{padding-block:clamp(72px,9vw,112px)}
-section[id],#book{scroll-margin-top:84px}
+section[id]{scroll-margin-top:84px}
 .tint{background:var(--surface-2)}
 
 .eyebrow{font-family:var(--caps);font-size:.78rem;letter-spacing:.24em;text-transform:uppercase;font-weight:600;color:var(--gold-ink)}
@@ -107,7 +107,7 @@ header.site.scrolled{box-shadow:var(--shadow-sm)}
 .hero-bg img{width:100%;height:100%;object-fit:cover;filter:blur(28px) saturate(1.2);animation:drift 26s ease-in-out infinite alternate}
 @keyframes drift{from{transform:scale(1.1) translate(-2%,-1%)}to{transform:scale(1.22) translate(2%,1.5%)}}
 .hero-inner{position:relative;z-index:3;display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;
-  min-height:min(86vh,760px);padding-block:84px 150px}
+  min-height:min(86vh,760px);padding-block:84px 104px}
 .hero-copy{display:flex;flex-direction:column;align-items:flex-start;gap:20px}
 .hero-mark{width:62px;color:var(--gold)}
 .hero .eyebrow{color:var(--gold-soft)}
@@ -130,50 +130,10 @@ header.site.scrolled{box-shadow:var(--shadow-sm)}
   text-transform:uppercase;line-height:1.3;box-shadow:0 18px 40px -16px rgba(0,0,0,.7);border:3px solid rgba(255,255,255,.35)}
 .hc-badge strong{display:block;font-family:var(--display);font-size:1.75rem;letter-spacing:0;line-height:1.05;margin:2px 0}
 @media (max-width:900px){
-  .hero-inner{grid-template-columns:1fr;gap:36px;padding-block:64px 130px;min-height:0}
+  .hero-inner{grid-template-columns:1fr;gap:36px;padding-block:64px 84px;min-height:0}
   .hero-collage{height:min(420px,92vw);max-width:520px;width:100%;margin-inline:auto}
   .hc-badge{width:104px;height:104px}.hc-badge strong{font-size:1.45rem}
 }
-
-/* ---------- plan your stay (overlaps the hero) ---------- */
-.book{position:relative;z-index:10;margin-top:-92px}
-.book-card{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
-  box-shadow:var(--shadow);padding:22px 24px}
-.book-card::before{content:"";position:absolute;left:24px;right:24px;top:0;height:3px;border-radius:0 0 3px 3px;background:var(--gold-grad)}
-.book-card.flash{animation:flash 1.2s var(--ease)}
-@keyframes flash{30%{box-shadow:0 0 0 5px rgba(201,162,74,.45),var(--shadow)}}
-.book-title{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px}
-.book-title h2{font-size:1.7rem}
-.book-title p{font-size:.8rem;color:var(--ink-soft);letter-spacing:.04em}
-.book-fields{display:grid;grid-template-columns:1.6fr 1fr 1fr .8fr;gap:12px}
-.field{display:flex;flex-direction:column;gap:6px;min-width:0}
-.field label{font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:var(--ink-soft)}
-.field input,.field select{font:inherit;font-size:.92rem;color:var(--ink);background:var(--ground);border:1px solid var(--line);
-  border-radius:var(--radius-sm);padding:12px 14px;width:100%;appearance:none;transition:border-color .2s,box-shadow .2s}
-.field select{padding-right:36px;cursor:pointer;
-  background:var(--ground) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2314234A' stroke-width='2.5' stroke-linecap='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 14px center}
-.field input:focus,.field select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,162,74,.22)}
-.book-hint{margin-top:12px;font-size:.84rem;color:var(--ink-soft)}
-.book-hint.err{color:#B4442F}
-/* height animates via grid rows 0fr → 1fr */
-.estimate{display:grid;grid-template-rows:0fr;transition:grid-template-rows .55s var(--ease)}
-.estimate.open{grid-template-rows:1fr}
-.estimate>div{overflow:hidden}
-.est-body{display:grid;grid-template-columns:1fr auto;gap:16px 28px;align-items:center;margin-top:18px;padding-top:18px;
-  border-top:1px dashed var(--line);animation:fade .5s ease}
-.est-lines{display:flex;flex-direction:column;gap:3px;font-size:.88rem;color:var(--ink-soft)}
-.est-lines strong{color:var(--ink);font-weight:600;font-size:.95rem}
-.est-total{text-align:right}
-.est-total small{display:block;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);font-weight:600}
-.est-total strong{display:inline-block;font-family:var(--display);font-size:2.5rem;line-height:1.05;color:var(--navy);animation:pop-num .45s var(--ease)}
-@keyframes pop-num{from{transform:scale(.85);opacity:.3}}
-.est-actions{grid-column:1/-1;display:flex;gap:10px;flex-wrap:wrap}
-.est-note{grid-column:1/-1;font-size:.76rem;color:var(--ink-soft)}
-@media (max-width:860px){
-  .book-fields{grid-template-columns:1fr 1fr}.book-fields .field-room{grid-column:1/-1}
-  .est-body{grid-template-columns:1fr}.est-total{text-align:left}
-}
-@media (max-width:480px){.est-actions .btn{flex:1 1 100%}.field input[type=date]{padding-inline:10px;font-size:.88rem}}
 
 /* ---------- about ---------- */
 .about-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center}
@@ -213,7 +173,6 @@ header.site.scrolled{box-shadow:var(--shadow-sm)}
 .price .amt{font-family:var(--display);font-size:1.95rem;font-weight:700;color:var(--navy);line-height:1}
 .price .per{font-size:.78rem;color:var(--ink-soft)}
 .price small{display:block;font-size:.7rem;color:var(--ink-soft);margin-top:5px}
-.room-foot .btn{padding:.8em 1.2em;font-size:.82rem}
 @media (max-width:1080px){.rooms-grid{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:600px){.rooms-grid{grid-template-columns:1fr;max-width:440px;margin-inline:auto}}
 
@@ -354,11 +313,12 @@ footer.site{background:var(--navy-deep);color:#AEB6CC;padding-block:56px 28px;bo
 @keyframes toast-in{from{opacity:0;transform:translate(-50%,20px)}}
 .mobile-bar{display:none}
 @media (max-width:700px){
-  .mobile-bar{position:fixed;left:12px;right:12px;bottom:12px;z-index:60;display:grid;grid-template-columns:1fr 1fr;gap:8px;
+  .mobile-bar{position:fixed;left:12px;right:12px;bottom:12px;z-index:60;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;
     padding:8px;border-radius:999px;background:color-mix(in srgb,var(--surface) 90%,transparent);backdrop-filter:blur(12px);
     -webkit-backdrop-filter:blur(12px);border:1px solid var(--line);box-shadow:var(--shadow);
     transform:translateY(140%);transition:transform .45s var(--ease)}
   .mobile-bar.show{transform:none}
+  .mobile-bar .btn{padding-inline:.6em;font-size:.84rem}
   .toast{bottom:88px}
   footer.site{padding-bottom:100px}
 }

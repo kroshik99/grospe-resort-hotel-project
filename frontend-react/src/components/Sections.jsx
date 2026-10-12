@@ -4,6 +4,7 @@ import Icon from './Icon.jsx';
 import Logo, { Brand } from './Logo.jsx';
 import { CountUp } from '../useReveal.jsx';
 import { RESORT, ROOMS, SERVICES, GALLERY, FAQ } from '../content.js';
+import { bookingLink } from '../contact.js';
 
 // `.reveal` elements fade/slide in on scroll (see useReveal); `--i` staggers siblings.
 
@@ -157,7 +158,8 @@ export function FinalCta() {
         <h2>Your Boracay escape starts here</h2>
         <p>{RESORT.tagline}</p>
         <div className="cta-row">
-          <a href={RESORT.messenger} target="_blank" rel="noopener" className="btn btn-gold"><Icon name="chat" size={18} /> Message us</a>
+          <a {...bookingLink} className="btn btn-gold"><Icon name="calendar" size={18} /> Book now</a>
+          <a href={RESORT.messenger} target="_blank" rel="noopener" className="btn btn-outline-light"><Icon name="chat" size={18} /> Message us</a>
           <a href={RESORT.landline.href} className="btn btn-outline-light"><Icon name="phone" size={18} /> {RESORT.landline.label}</a>
         </div>
       </div>
@@ -188,7 +190,7 @@ export function Footer() {
   );
 }
 
-/** Phone-only bar: Message / Call always one tap away once you're past the hero. */
+/** Phone-only bar: Book / Message / Call always one tap away once you're past the hero. */
 export function MobileBar() {
   const [show, setShow] = useState(false);
   useEffect(() => {
@@ -199,8 +201,9 @@ export function MobileBar() {
   }, []);
   return (
     <div className={`mobile-bar${show ? ' show' : ''}`}>
-      <a href={RESORT.messenger} target="_blank" rel="noopener" className="btn btn-gold"><Icon name="chat" size={18} /> Message</a>
-      <a href={RESORT.mobile.href} className="btn btn-navy"><Icon name="phone" size={18} /> Call</a>
+      <a {...bookingLink} className="btn btn-gold"><Icon name="calendar" size={18} /> Book</a>
+      <a href={RESORT.messenger} target="_blank" rel="noopener" className="btn btn-navy"><Icon name="chat" size={18} /> Message</a>
+      <a href={RESORT.mobile.href} className="btn btn-ghost"><Icon name="phone" size={18} /> Call</a>
     </div>
   );
 }

@@ -11,7 +11,7 @@ export function Checks({ items }) {
   );
 }
 
-export default function Rooms({ onInquire }) {
+export default function Rooms() {
   return (
     <section id="rooms">
       <div className="wrap">
@@ -35,7 +35,6 @@ export default function Rooms({ onInquire }) {
                     <span className="line"><span className="amt">{peso.format(room.price)}</span> <span className="per">/ {room.unit}</span></span>
                     {room.extra && <small>+{peso.format(room.extra)} per extra guest</small>}
                   </div>
-                  <a href="#book" className="btn btn-navy" onClick={() => onInquire(room.id)}>Inquire</a>
                 </div>
               </div>
             </article>

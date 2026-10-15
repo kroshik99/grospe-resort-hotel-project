@@ -68,10 +68,8 @@ the logo-style capitals, Cormorant Garamond for headings, Montserrat for body te
 ## How booking works
 
 - **Book now** (header, hero, closing banner, phone bar) and **Book your stay**
-  (events) first show a short "Leaving our site" dialog, then **Continue to
-  booking** opens the resort's SwiftBook page in a new tab (ctrl/cmd-click
-  skips the dialog). The link is `RESORT.booking` in `content.js`: change it
-  there and every button and the dialog follow.
+  (events) open the resort's SwiftBook booking page in a new tab. The link is
+  `RESORT.booking` in `content.js`: change it there and every button follows.
 - **Message us** opens `m.me/grosperesortboracay`. The packages' **Inquire**
   button first copies a message naming the package, since Messenger links
   can't be pre-filled, so the guest just pastes it.

@@ -2,7 +2,7 @@
 
 A customer-facing site for Grospe Resort Boracay (Station 3, Boracay): the
 landing page plus an events page. Front end only: no backend, no database.
-Guests see rooms and rates, then book on the resort's swift.io booking page or
+Guests see rooms and rates, then book on the resort's SwiftBook booking page or
 get in touch by Facebook Messenger or phone.
 
 ```

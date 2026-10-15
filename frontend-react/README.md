@@ -2,7 +2,7 @@
 
 Vite + React 18 site with two pages: the landing page (`/`) and events
 (`/events/`). No backend: rooms, rates, events and copy live in one file.
-Guests book on the resort's own swift.io booking page, or reach the resort by
+Guests book on the resort's SwiftBook booking page, or reach the resort by
 Messenger or a call.
 
 ```bash
@@ -17,7 +17,7 @@ Almost everything is in **`src/content.js`**:
 
 | What | Where in `content.js` |
 |---|---|
-| Phone numbers, Facebook / Messenger link, **swift.io booking link**, address, map search | `RESORT` |
+| Phone numbers, Facebook / Messenger link, **SwiftBook booking link**, address, map search | `RESORT` |
 | Rooms, nightly rates, extra-guest fee, max guests, features | `ROOMS` |
 | Ber-months 4D/3N packages | `PACKAGES` |
 | The six services | `SERVICES` |
@@ -68,8 +68,10 @@ the logo-style capitals, Cormorant Garamond for headings, Montserrat for body te
 ## How booking works
 
 - **Book now** (header, hero, closing banner, phone bar) and **Book your stay**
-  (events) open the resort's swift.io booking page in a new tab. The link is
-  `RESORT.booking` in `content.js`: change it there and every button follows.
+  (events) first show a short "Leaving our site" dialog, then **Continue to
+  booking** opens the resort's SwiftBook page in a new tab (ctrl/cmd-click
+  skips the dialog). The link is `RESORT.booking` in `content.js`: change it
+  there and every button and the dialog follow.
 - **Message us** opens `m.me/grosperesortboracay`. The packages' **Inquire**
   button first copies a message naming the package, since Messenger links
   can't be pre-filled, so the guest just pastes it.

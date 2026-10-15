@@ -5,6 +5,7 @@ import Hero from './components/Hero.jsx';
 import Rooms from './components/Rooms.jsx';
 import Packages from './components/Packages.jsx';
 import Toast, { useToast } from './components/Toast.jsx';
+import BookingNotice from './components/BookingNotice.jsx';
 import { EventBar, EventPromo } from './components/Events.jsx';
 import { About, Services, Gallery, Location, Faq, FinalCta, Footer, MobileBar } from './components/Sections.jsx';
 
@@ -37,6 +38,7 @@ export default function App() {
       <Footer />
       <MobileBar />
       <Toast text={toast} />
+      <BookingNotice />
     </>
   );
 }

@@ -7,6 +7,7 @@ import Header from './components/Header.jsx';
 import Icon from './components/Icon.jsx';
 import Logo from './components/Logo.jsx';
 import Photo from './components/Photo.jsx';
+import BookingNotice from './components/BookingNotice.jsx';
 import { Countdown } from './components/Events.jsx';
 import { Night, Pumpkin, Web } from './components/Spooky.jsx';
 import { Footer, MobileBar } from './components/Sections.jsx';
@@ -41,6 +42,7 @@ export default function EventsPage() {
       <Footer />
       <MobileBar />
       {poster && <PosterView ev={poster} onClose={closePoster} />}
+      <BookingNotice />
     </>
   );
 }

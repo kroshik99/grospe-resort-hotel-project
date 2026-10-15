@@ -9,7 +9,7 @@ export const RESORT = {
   mobile: { label: '0985-0821245', href: 'tel:+639850821245', sms: '+639850821245' },
   facebook: 'https://www.facebook.com/grosperesortboracay/',
   messenger: 'https://m.me/grosperesortboracay',
-  booking: '', // TODO: the client's swift.io booking page — every "Book now" button opens it
+  booking: 'https://www.swiftbook.io/inst/#home?propertyId=521Ns5fUeMB9jeVCIfDZjiQ0XDGlFyTU3ODg=&JDRN=Y', // SwiftBook — every "Book now" button opens it
   mapQuery: 'Grospe Resort Boracay, Ambulong, Manoc-Manoc, Malay, Aklan',
 };
 
